@@ -8,6 +8,7 @@ export class Grid {
     this.gridContainer = document.getElementById(this.rootId);
     this.currentPlayedRow = 0;
     this.isPlaying = false;
+    this.cells = [];
   }
 
   init() {
@@ -84,6 +85,7 @@ export class Grid {
       cell.addEventListener('mouseenter', () => {
         if (this.isMouseDown) this.toggleCellState(cell);
       });
+      this.cells.push(cell);
       row.append(cell);
     }
   }

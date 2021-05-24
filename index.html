@@ -7,10 +7,28 @@
     <title>Augmented Rythms</title>
     <link rel="stylesheet" href="index.css" />
     <script type="module" src="main.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="app-container">
       <div id="grid-container"></div>
     </div>
+    <video id="video-input"></video>
+    <canvas id="canvas-output" width="780" height="439"></canvas>
   </body>
 </html>
