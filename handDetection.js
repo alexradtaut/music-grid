@@ -1,4 +1,6 @@
 import RightHand from './rightHand.js';
+import LeftHand from './leftHand.js';
+import GestureClassifier from './gestureClassifier.js';
 export default class HandDetection {
   constructor(grid) {
     this.grid = grid;
@@ -8,6 +10,9 @@ export default class HandDetection {
     this.initializeHolistic();
     this.initializeCamera();
     this.rightHand = new RightHand(this.grid);
+    this.leftHand = new LeftHand();
+    this.gestureClassifier = new GestureClassifier();
+    this.gestureClassifier.init();
   }
   initializeElements() {
     this.videoElement = document.getElementById('video-input');
@@ -25,6 +30,7 @@ export default class HandDetection {
       smoothLandmarks: true,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
+      selfieMode: true,
     });
     this.holistic.onResults(this.onResults.bind(this));
   }
@@ -55,32 +61,12 @@ export default class HandDetection {
     );
     this.rightHand.updateLandmarks(results.rightHandLandmarks);
     this.rightHand.draw(this.canvasCtx);
-    // drawConnectors(
-    //   this.canvasCtx,
-    //   results.leftHandLandmarks,
-    //   HAND_CONNECTIONS,
-    //   {
-    //     color: '#CC0000',
-    //     lineWidth: 5,
-    //   }
-    // );
-    // drawLandmarks(this.canvasCtx, results.leftHandLandmarks, {
-    //   color: '#00FF00',
-    //   lineWidth: 2,
-    // });
-    // drawConnectors(
-    //   this.canvasCtx,
-    //   results.rightHandLandmarks,
-    //   HAND_CONNECTIONS,
-    //   {
-    //     color: '#00CC00',
-    //     lineWidth: 5,
-    //   }
-    // );
-    // drawLandmarks(this.canvasCtx, results.rightHandLandmarks, {
-    //   color: '#FF0000',
-    //   lineWidth: 2,
-    // });
+    if (results.leftHandLandmarks) {
+      this.leftHand.updateLandmarks(results.leftHandLandmarks);
+      this.leftHand.draw(this.canvasCtx);
+      this.gestureClassifier.addExample(results.image);
+      this.gestureClassifier.predict(results.image, this.grid);
+    }
     this.canvasCtx.restore();
   }
 }

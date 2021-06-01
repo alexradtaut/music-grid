@@ -23,7 +23,7 @@ export default class RightHand {
 
   draw(ctx) {
     this.indexFingerTip = this.landmarks && this.landmarks[8];
-    console.log(this.indexFingerTip);
+    // console.log(this.indexFingerTip);
     if (this.indexFingerTip) {
       const isPressed = this.indexFingerTip.z < -0.1;
       ctx.beginPath();

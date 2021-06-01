@@ -77,3 +77,38 @@
   border: 1px solid;
   z-index: 1;
 }
+.gesture-classifier-btn {
+  border: 1px dashed;
+  width: 100px;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+}
+.gesture-classifier-btn.training {
+  border: solid;
+}
+.gesture-classifier-btn.predicted {
+  background-color: lightpink;
+}
+#gesture-0 {
+  border-color: red;
+}
+#gesture-1 {
+  border-color: blue;
+}
+#gesture-2 {
+  border-color: green;
+}
+.gesture-cell {
+  width: 20px;
+}
+
+.gesture-0 {
+  background-color: red;
+}
+.gesture-1 {
+  background-color: blue;
+}
+.gesture-2 {
+  background-color: green;
+}
